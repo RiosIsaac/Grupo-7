@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de autogestión · Inscribirse a materia (MVP)</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Encabezado: autenticación simulada -->
+  <header class="topbar">
+    <div class="topbar__marca">
+      <span class="topbar__logo" aria-hidden="true">U</span>
+      <div>
+        <h1 class="topbar__titulo">Portal de autogestión</h1>
+        <p class="topbar__subtitulo">Ecosistema Integral de Gestión Universitaria · MVP</p>
+      </div>
+    </div>
+
+    <div class="topbar__sesion">
+      <label for="selEstudiante" class="topbar__label">Ingresar como (autenticación simulada)</label>
+      <select id="selEstudiante" class="control"></select>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- Contexto académico del estudiante -->
+    <section class="card" aria-labelledby="tituloEstudiante">
+      <h2 id="tituloEstudiante" class="card__titulo">Datos del estudiante</h2>
+      <div id="datosEstudiante"></div>
+    </section>
+
+    <!-- Navegación -->
+    <nav class="tabs" role="tablist" aria-label="Secciones del portal">
+      <button class="tab tab--activa" role="tab" data-tab="inscribirse" aria-selected="true">Inscribirse a materia</button>
+      <button class="tab" role="tab" data-tab="inscripciones" aria-selected="false">Mis inscripciones</button>
+      <button class="tab" role="tab" data-tab="oferta" aria-selected="false">Oferta académica</button>
+      <button class="tab" role="tab" data-tab="escenarios" aria-selected="false">Escenarios de prueba</button>
+    </nav>
+
+    <!-- ===== Vista 1: Inscribirse a materia (CU01) ===== -->
+    <section class="vista vista--activa" data-vista="inscribirse" aria-labelledby="tituloInscribirse">
+      <h2 id="tituloInscribirse" class="vista__titulo">Inscribirse a materia</h2>
+
+      <div class="grilla-inscripcion">
+        <div class="columna">
+          <!-- Paso 1: materia -->
+          <section class="card">
+            <h3 class="card__titulo"><span class="paso">1</span> Materia</h3>
+            <label for="selMateria" class="etiqueta">Materias de su carrera</label>
+            <select id="selMateria" class="control control--ancho"></select>
+            <p id="mensajeMaterias" class="mensaje mensaje--info" hidden></p>
+
+            <label class="check">
+              <input type="checkbox" id="chkDemo">
+              <span>Modo demostración: mostrar materias de otras carreras y comisiones sin cupo o cerradas, para probar las excepciones</span>
+            </label>
+          </section>
+
+          <!-- Paso 2: comisión -->
+          <section class="card">
+            <h3 class="card__titulo"><span class="paso">2</span> Comisiones con inscripción abierta</h3>
+            <div id="contenedorComisiones"></div>
+          </section>
+        </div>
+
+        <div class="columna">
+          <!-- Pasos 3 a 5: resumen y confirmación -->
+          <section class="card">
+            <h3 class="card__titulo"><span class="paso">3</span> Resumen de la inscripción</h3>
+            <div id="resumen" aria-live="polite"></div>
+            <div class="acciones">
+              <button id="btnConfirmar" class="boton boton--primario" type="button">Confirmar inscripción</button>
+              <button id="btnCancelar" class="boton" type="button">Cancelar</button>
+            </div>
+          </section>
+
+          <!-- Detalle de la verificación RN01 a RN07 -->
+          <section class="card">
+            <h3 class="card__titulo">Verificación de condiciones (RN01 a RN07)</h3>
+            <div id="verificacion" aria-live="polite"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Vista 2: Mis inscripciones ===== -->
+    <section class="vista" data-vista="inscripciones" aria-labelledby="tituloMisInscripciones">
+      <h2 id="tituloMisInscripciones" class="vista__titulo">Mis inscripciones</h2>
+      <section class="card">
+        <div id="contenedorInscripciones"></div>
+      </section>
+    </section>
+
+    <!-- ===== Vista 3: Oferta académica ===== -->
+    <section class="vista" data-vista="oferta" aria-labelledby="tituloOferta">
+      <h2 id="tituloOferta" class="vista__titulo">Oferta académica de su carrera</h2>
+      <div id="contenedorOferta"></div>
+    </section>
+
+    <!-- ===== Vista 4: Escenarios de prueba ===== -->
+    <section class="vista" data-vista="escenarios" aria-labelledby="tituloEscenarios">
+      <h2 id="tituloEscenarios" class="vista__titulo">Escenarios de prueba</h2>
+      <p class="texto-ayuda">
+        Cada botón carga al estudiante, la materia y la comisión del escenario. Después hay que presionar
+        «Confirmar inscripción». Los escenarios 1 a 5 son los de la consigna; los demás cubren el resto de las excepciones.
+      </p>
+      <div id="contenedorEscenarios" class="grilla-escenarios"></div>
+      <div class="acciones">
+        <button id="btnReiniciar" class="boton" type="button">Reiniciar datos de demostración</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    Diseño de Aplicaciones Web · UNLaM 2026 · TP Integral, Segunda Parte · Actividad 4 (MVP)
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="datos.js"></script>
+  <script src="modelo.js"></script>
+  <script src="controlador.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
